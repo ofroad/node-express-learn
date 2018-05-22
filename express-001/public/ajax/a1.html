@@ -4,20 +4,66 @@
 <meta charset="utf-8" />
 <title>接口测试</title>
 
-
 <style type="text/css">
-   .wrapper {position: relative;}
-   #input {position: absolute;top: 0;left: 0;opacity: 0;z-index: -10;}
+.wrapper{position: relative; padding:200px;}
+#btn{width:200px; height:40px; cursor:pointer;}
 </style>
 </head>
 <body>
 <div class="wrapper">
-
+	<div>
+		<div>用户名：<input id="uname" type="text" value="" /></div>
+		<div>密码：<input id="upwd" type="password" value="" /></div>
+		<div>重复密码：<input id="upwdrep" type="password" value="" /></div>
+		<div>邮箱：<input id="uemail" type="text" value="" /></div>
+		<div>手机：<input id="uphone" type="text" value="" /></div>
+		<div><input id="btn" type="button" value="注册"  /></div>
+	</div>
+	<div>
+		<div>标题：<input id="title" type="text" value="" /></div>
+		<div>内容：<input id="content" type="text" value="" /></div>
+		<div><input id="btn2" type="button" value="发布"  /></div>
+	</div>
 </div>
 <script src="jquery1.8.3.js" ></script>
 <script>
 $(function(){
 	console.log("www");
+	$("#btn").on("click",function(){
+		$.ajax({
+            type:'POST',
+            url:'http://10.138.20.141:3000/v1/user/register',
+            data:{
+                username:$("#uname").val(),
+                password:$("#upwd").val(),
+                repassword:$("#upwdrep").val(),
+                mobile:$("#uphone").val(),
+                email:$("#uemail").val()
+            },
+            dataType:'json',
+            success:function (result) {
+                alert(result.message);
+				console.log(result);
+            }
+        })
+	});
+	
+	$("#btn2").on("click",function(){
+		$.ajax({
+            type:'POST',
+            url:'http://10.138.20.141:3000/v1/user/submitArticle',
+            data:{
+                title:$("#title").val(),
+                content:$("#content").val()
+            },
+            dataType:'json',
+            success:function (result) {
+                alert(result.message);
+				console.log(result);
+            }
+        })
+	});
+	/*
 	$.ajax({
 	   type: "get",
 	   url: "http://10.138.20.141:3000/v1/getUserInfo",
@@ -27,6 +73,7 @@ $(function(){
 			console.log(data)
 	   }
 	});
+	*/
 });
 
 

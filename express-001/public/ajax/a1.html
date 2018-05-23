@@ -32,7 +32,7 @@ $(function(){
 	$("#btn").on("click",function(){
 		$.ajax({
             type:'POST',
-            url:'http://10.138.20.141:3000/v1/user/register',
+            url:'http://192.168.0.102:3000/v1/user/register',
             data:{
                 username:$("#uname").val(),
                 password:$("#upwd").val(),
@@ -51,7 +51,7 @@ $(function(){
 	$("#btn2").on("click",function(){
 		$.ajax({
             type:'POST',
-            url:'http://10.138.20.141:3000/v1/user/submitArticle',
+            url:'http://192.168.0.102:3000/v1/user/submitArticle',
             data:{
                 title:$("#title").val(),
                 content:$("#content").val()
@@ -66,7 +66,7 @@ $(function(){
 	/*
 	$.ajax({
 	   type: "get",
-	   url: "http://10.138.20.141:3000/v1/getUserInfo",
+	   url: "http://192.168.0.102:3000/v1/getUserInfo",
 	   data: "id=2",
 	   success: function(data){
 			alert("222");

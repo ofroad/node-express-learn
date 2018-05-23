@@ -117,6 +117,10 @@ router.post('/user/register',function (req,res) {
 			email:email,
 			mobile:mobilephone
         });
+		console.log(user);
+		console.log(user.mobile);
+		console.log(user.id);
+		console.log(user._id);
 		//user是User(Model)的实例，即document,document有方法save
         user.save();
         responseData.code = 4;

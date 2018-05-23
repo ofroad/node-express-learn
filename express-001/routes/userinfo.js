@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var User = require('../Models/User');
 var Article = require('../Models/article');
+console.log(mongoose);
 
 //设置cors
 router.all('*',function (req,res,next) {

@@ -17,6 +17,15 @@
 		<div>重复密码：<input id="upwdrep" type="password" value="" /></div>
 		<div>邮箱：<input id="uemail" type="text" value="" /></div>
 		<div>手机：<input id="uphone" type="text" value="" /></div>
+		
+		<div>年龄：<input id="age" type="text" value="" /></div>
+		<div>性别：<input id="sex" type="text" value="" /></div>
+		<div>姓名：<input id="name" type="text" value="" /></div>
+		<div>工龄：<input id="workage" type="text" value="" /></div>
+		<div>职业：<input id="job" type="text" value="" /></div>
+		<div>子女数量：<input id="childnumb" type="text" value="" /></div>
+		<div>房产数量：<input id="housenumb" type="text" value="" /></div>
+		
 		<div><input id="btn" type="button" value="注册"  /></div>
 	</div>
 	<div>
@@ -38,7 +47,14 @@ $(function(){
                 password:$("#upwd").val(),
                 repassword:$("#upwdrep").val(),
                 mobile:$("#uphone").val(),
-                email:$("#uemail").val()
+                email:$("#uemail").val(),
+				age:$("#age").val(),
+				sex:$("#sex").val(),
+				truename:$("#name").val(),
+				workage:$("#workage").val(),
+				job:$("#job").val(),
+				childnumb:$("#childnumb").val(),
+				housenumb:$("#housenumb").val()
             },
             dataType:'json',
             success:function (result) {

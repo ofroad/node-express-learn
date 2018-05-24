@@ -77,6 +77,14 @@ router.post('/user/register',function (req,res) {
     var repassword = req.body.repassword;
     var mobilephone = req.body.mobile;
     var email = req.body.email;
+	var age = req.body.age;
+	var sex = req.body.sex;
+	var name = req.body.truename;
+	var workage = req.body.workage;
+	var job = req.body.job;
+	var childnumb = req.body.childnumb;
+	var housenumb = req.body.housenumb;
+	
     // 判断用户名是否为空
     if( username == ''){
         responseData.code = 2;
@@ -98,6 +106,27 @@ router.post('/user/register',function (req,res) {
         res.json(responseData);
         return;
     }
+	// 判断邮箱是否为空
+    if( email == ''){
+        responseData.code = 2;
+        responseData.message = '邮箱不能为空';
+        res.json(responseData);
+        return;
+    }
+	// 判断年龄是否为空
+    if( age == ''){
+        responseData.code = 2;
+        responseData.message = '年龄不能为空';
+        res.json(responseData);
+        return;
+    }
+	// 判断姓名是否为空
+    if( name == ''){
+        responseData.code = 2;
+        responseData.message = '姓名不能为空';
+        res.json(responseData);
+        return;
+    }
     // 判断用户名是否已经注册
 	//User是Model，Model有方法findOne
     User.findOne({
@@ -115,8 +144,31 @@ router.post('/user/register',function (req,res) {
             username: username,
             password: password,
 			email:email,
-			mobile:mobilephone
+			age:age,
+			truename:name
         });
+		if(mobilephone.length){
+			user.mobile=mobilephone;
+		}
+		if(sex.length){
+			user.sex=sex;
+		}
+		if(workage.length){
+			user.workage=workage;
+		}
+		if(job.length){
+			user.job=job;
+		}
+		if(childnumb.length){
+			user.childnumb=childnumb;
+		}
+		if(housenumb.length){
+			user.housenumb=housenumb;
+		}
+		
+		
+		
+		
 		console.log(user);
 		console.log(user.mobile);
 		console.log(user.id);
@@ -205,5 +257,158 @@ router.post('/user/login',function (req,res) {
         return
     });
 });
+
+//find查询--01
+/*
+var find_01=User.find({workage:2},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+console.log(find_01);
+
+//find查询--02
+var find_02=User.find({sex:"女",age:{ $gte:40}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+console.log(find_02);
+
+//find查询--03(过滤字段)--想返回哪些字段，需要让他的值为true,如果设为false,会报错，如下
+var find_03=User.find({sex:"女"},{truename:-1,mobile:-1,job:1,email:2,housenumb:true},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+console.log(find_03);
+
+//find查询--04(限制查询结果返回的数量)--
+var find_04=User.find({sex:"女"},null,{limit:2},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+console.log(find_04);
+*/
+//find查询--05(返回的查询结果跳过前n个，即返回的查询的结果不包含前n个)--
+var find_05=User.find({sex:"女",age:{ $gte:30}},null,{skip:1},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+console.log(find_05);
+
+
+//find查询--06(返回结果排序，-1表示降序，1表示升序)
+var find_06=User.find({sex:"女"},null,{sort:{age:1}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+console.log(find_06);
+
 
 module.exports = router;

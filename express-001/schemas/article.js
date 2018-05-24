@@ -7,4 +7,6 @@ module.exports =mongoose.Schema({
     // 内容
     content:String
 
+},{
+	collection:"articlestable"
 })

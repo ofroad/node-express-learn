@@ -359,7 +359,9 @@ var find_04=User.find({sex:"女"},null,{limit:2},function(err,doc){
 });
 console.log(find_04);
 */
+
 //find查询--05(返回的查询结果跳过前n个，即返回的查询的结果不包含前n个)--
+/*
 var find_05=User.find({sex:"女",age:{ $gte:30}},null,{skip:1},function(err,doc){
 	if(err){
 		console.log("err===",err);
@@ -383,9 +385,10 @@ var find_05=User.find({sex:"女",age:{ $gte:30}},null,{skip:1},function(err,doc)
 	}
 });
 console.log(find_05);
-
+*/
 
 //find查询--06(返回结果排序，-1表示降序，1表示升序)
+/*
 var find_06=User.find({sex:"女"},null,{sort:{age:1}},function(err,doc){
 	if(err){
 		console.log("err===",err);
@@ -409,6 +412,433 @@ var find_06=User.find({sex:"女"},null,{sort:{age:1}},function(err,doc){
 	}
 });
 console.log(find_06);
+*/
+
+//find查询--07(过滤字段)--想返回哪些字段，可以用以空格隔开的字段名指示，如下
+/*
+var find_07=User.find({sex:"女"},"sex job truename",function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+*/
+
+//find查询--08(过滤字段)--想返回哪些字段，可以用以包含字段名的数组指示，如下
+/*
+var find_08=User.find({sex:"女"},["sex","job","truename"],function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc===",doc[0]);
+		console.log("doc username===",doc[0].username);
+		console.log("doc password===",doc[0].password);
+		console.log("doc email===",doc[0].email);
+		console.log("doc mobile===",doc[0].mobile);
+		console.log("doc id===",doc[0].id);
+		console.log("doc _id===",doc[0]._id);
+		console.log("doc $init===",doc[0].$init);
+		console.log("doc job===",doc[0].job);
+		console.log("doc truename===",doc[0].truename);
+		console.log("doc housenumb===",doc[0].housenumb);
+		console.log("doc workage===",doc[0].workage);
+		console.log("doc typeof workage===",typeof doc[0].workage);
+		console.log("doc _doc===",doc[0]._doc);
+	}
+});
+*/
+
+//find查询--09(综合查询1)
+/*
+var find_09=User.find({sex:"女"},null,{sort:{age:1},limit:2,skip:3},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc id===",doc[0].id);//id值
+		console.log("doc _id===",doc[0]._id);//ObjectID
+	}
+});
+*/
+
+
+//findById--10(_id参数可以是对象或者字符串)
+/*
+var find_10=User.findById({"_id":"5b077477ee4fe822ecbcdf37"},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		//console.log("doc _id===",doc[0]._id);//ObjectID
+	}
+});
+
+var find_11=User.findById("5b077477ee4fe822ecbcdf37",function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc _id===",doc._id);//ObjectID
+	}
+});
+
+
+//过滤返回的字段--除了email其他都返回(就是排除)
+var find_12=User.findById("5b077477ee4fe822ecbcdf37","-email",function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		console.log("doc _id===",doc._id);//ObjectID
+	}
+});
+*/
+
+/*==========================================*/
+
+
+//通过id找到这条记录后，删除这条记录(文档),如果文档不存在,doc返回null
+/*
+var find_13=User.findByIdAndDelete("5b077477ee4fe822ecbcdf37",function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+	}
+});
+
+
+//通过id找到这条记录后，删除这条记录(文档),如果文档不存在,doc返回null
+var find_14=User.findByIdAndRemove("5b077a3fdd4ccc094878b514",function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+	}
+});
+
+
+//通过id找到这条记录后，更新这条记录，如果id和记录的id长度不一致，此时是找不到这条记录的，会报错走err--(在没有设置options的upsert情况下)
+//如果id和记录的id长度一致,但是找不到这条记录，不会走err，doc会返回null,也不会新建此记录--(在没有设置options的upsert情况下)
+//如果id和记录的id长度一致,但是找不到这条记录，不会走err，doc会返回null,会新建此记录--(在设置options的upsert为true情况下),doc返回null是因为默认返回更新前的记录
+//设置new为true后返回更新后的记录
+var find_15=User.findByIdAndUpdate("bb077b56dd4ccc094878b51a",{workage:10,truename:"何小贷13--修改后的"},{upsert:true,new:true},function(err,doc){
+	if(err){
+		console.log("err===",err);
+	}else{
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+	}
+});
+
+
+//只返回单个文档，也就说当查询到即一个符合条件的数据时，将停止继续查询，并返回查询结果。findOne方法，只返回第一个符合条件的文档数据。
+var find_16=User.findOne({sex:"男1"},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+
+//如果找到多条记录，只删除一条
+var find_17=User.findOneAndDelete({job:"学生"},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//如果找到多条记录，只删除一条
+var find_18=User.findOneAndRemove({sex:"男"},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//如果找到多条记录，只更新一条
+var find_19=User.findOneAndUpdate({truename:"赵环境"},{sex:"女"},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//返回所有记录
+var find_20=User.find({},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//"$lt"(小于)，"$lte"(小于等于),"$gt"(大于)，"$gte"(大于等于)，"$ne"(不等于)
+//返回age大于30并且小于38的所有记录
+var find_21=User.find({age:{$lt:38,$gt:30}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+
+//返回age等于33和age等于36的所有记录
+var find_22=User.find({age:{$in:[33,36]}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//返回age等于36或者truename等于李屏幕的所有记录
+var find_23=User.find({"$or":[{"truename": "李屏幕"}, {"age": 36}]},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+
+//返回age不等于33并且truename不等于李屏幕的所有记录
+var find_24=User.find({"$nor":[{"truename": "李屏幕"}, {"age": 33}]},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//结果同上
+var find_25=User.find({age:{$ne:33},truename:{$ne:"李屏幕"}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//$exists操作符，可用于判断某些关键字段是否存在来进行条件查询
+//查询所有存在housenumb属性的文档
+var find_26=User.find({housenumb:{$exists:true}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//"$and"表示同时满足查询条件
+var find_27=User.find({"$and":[{"truename": "李屏幕"}, {"age": 33}]},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+//返回age不是36和age不是33的所有记录
+var find_28=User.find({"$nor":[{"age": 36}, {"age": 33}]},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+*/
+
+
+
+//返回email中包含'112'的所有记录,忽略大小写
+var find_29=User.find({'email':{$regex:/112/i}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
 
 
 module.exports = router;

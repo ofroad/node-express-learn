@@ -19,7 +19,7 @@ module.exports =new mongoose.Schema({
 	// 工龄
     workage:{type:Number, default : 2},
 	// 职业
-    job:{type:String, default : "student"},
+    job:{type:String, default : "学生"},
 	// 子女数量
     childnumb:{type:Number, default : 1},
 	// 房产数量

@@ -9,6 +9,10 @@ var mongoose = require('mongoose');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var userinfo = require('./routes/userinfo');
+var Add = require('./routes/add');
+var Update = require('./routes/update');
+
+
 
 var app = express();
 

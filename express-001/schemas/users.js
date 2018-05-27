@@ -8,14 +8,14 @@ module.exports =new mongoose.Schema({
     password:String,
 	// 邮箱
     email:String,
-	// 手机
-    mobile:{type:String, default : '13811110000'},
 	// 年龄
     age:Number,
-	// 性别
-    sex:{type:String, default : '男'},
 	// 姓名
     truename:String,
+	// 性别
+    sex:{type:String, default : '男'},
+	// 手机
+    mobile:{type:String, default : '13811110000'},
 	// 工龄
     workage:{type:Number, default : 2},
 	// 职业

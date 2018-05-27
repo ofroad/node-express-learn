@@ -815,12 +815,10 @@ var find_28=User.find({"$nor":[{"age": 36}, {"age": 33}]},function(err,doc){
 		console.log("没有找到匹配的记录");
 	}
 });
-*/
-
 
 
 //返回email中包含'112'的所有记录,忽略大小写
-var find_29=User.find({'email':{$regex:/112/i}},function(err,doc){
+var find_29=User.find({'email':{$regex:/163/i}},function(err,doc){
 	if(err){
 		console.log("err===",err);
 		return;
@@ -839,6 +837,71 @@ var find_29=User.find({'email':{$regex:/112/i}},function(err,doc){
 });
 
 
+//返回email中包含'112'的所有记录,忽略大小写
+var find_30=User.find({'email':{$regex:/(\.com)$/,$options:"$i"}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+
+//返回age大于30的所有记录--使用字符串，this或obj指向每一条记录
+var find_30=User.find({$where:"this.age>30"},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+
+
+
+//返回age大于30的所有记录--使用函数，this或obj指向每一条记录
+var find_30=User.find({$where:function(){
+	return obj.age>30
+}},function(err,doc){
+	if(err){
+		console.log("err===",err);
+		return;
+	}
+	if(doc){
+		//没找到doc返回null
+		console.log("typeof doc===",typeof doc)
+		console.log("typeof Array.isArray()===",Array.isArray(doc))
+		console.log("doc===",doc);
+		//console.log("doc mobile===",doc.mobile);
+		//console.log("doc sex===",doc.sex);
+		//console.log("doc username===",doc.username);
+	}else{
+		console.log("没有找到匹配的记录");
+	}
+});
+*/
+
+console.log("form userinfo.js");
 
 
 module.exports = router;

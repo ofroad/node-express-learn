@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var User = require('../Models/User');
 var Article = require('../Models/article');
-//console.log(mongoose);
+console.log(mongoose);
 
 //设置cors
 router.all('*',function (req,res,next) {
@@ -28,55 +28,34 @@ var responseData;
 router.use( function (req,res,next) {
     responseData = {
         code: 0,
-        message:''
+        message:'',
+		data:[]
     };
     next();
 });
 
 
-//Model.update()更新一条或多条记录
-/*
-User.update({username:"a2"},{username:"a2111"},function(err,raw){
-	if(err){
-		console.log(err);
-	}else{
-		console.log(typeof raw);
-		//{ n: 1, nModified: 1, ok: 1 }
-		console.log(raw);
-	}
+// 查询所有用户
+router.post('/user/getall',function (req,res) {
+    // console.log(req.body);
+
+	//User是Model，Model有方法find,不返回email和__v字段
+	User.find({},"-__v -email",function(err,docs){
+		if(err){
+			console.log(err)
+		}else{
+			console.log(docs)
+			responseData.code = 4;
+			responseData.message = '查询成功';
+			responseData.data=docs;
+			res.json(responseData);
+			return;
+		}
+	});
 });
-*/
 
 
-//Model.update()更新一条或多条记录,设置multi:true更新多条记录
-/*
-User.update({username:"a8"},{username:"a8111"},{multi:true},function(err,raw){
-	if(err){
-		console.log(err);
-	}else{
-		console.log(typeof raw);
-		//{ n: 2, nModified: 2, ok: 1 }
-		console.log(raw);
-	}
-});
-*/
 
-
-//Model.updateMany()更新多条记录
-/*
-User.updateMany({username:"a9"},{username:"a943"},{multi:true},function(err,raw){
-	if(err){
-		console.log(err);
-	}else{
-		console.log(typeof raw);
-		//{ n: 2, nModified: 2, ok: 1 }
-		console.log(raw);
-	}
-});
-*/
-
-
-console.log("========form add.js========");
 
 
 module.exports = router;

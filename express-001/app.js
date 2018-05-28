@@ -11,7 +11,7 @@ var users = require('./routes/users');
 var userinfo = require('./routes/userinfo');
 var Add = require('./routes/add');
 var Update = require('./routes/update');
-
+var find = require('./routes/find');
 
 
 var app = express();
@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/v1', userinfo);
+app.use('/v2', find);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

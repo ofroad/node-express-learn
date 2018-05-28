@@ -90,6 +90,20 @@ $(function(){
 	   }
 	});
 	*/
+	
+	//查询所有用户数据
+	$.ajax({
+		type:'POST',
+		url:'http://localhost:3000/v2/user/getall',
+		data:{},
+		dataType:'json',
+		success:function (result) {
+			//alert(result.message);
+			console.log(result);
+			console.log(result.data[0]._id);
+			console.log(result.data[0].__v);
+		}
+	});
 });
 
 

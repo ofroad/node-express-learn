@@ -12,6 +12,7 @@ var userinfo = require('./routes/userinfo');
 var Add = require('./routes/add');
 var Update = require('./routes/update');
 var find = require('./routes/find');
+var jwt = require('./routes/jwt');
 
 
 var app = express();

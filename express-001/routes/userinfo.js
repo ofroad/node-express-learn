@@ -901,6 +901,38 @@ var find_30=User.find({$where:function(){
 });
 */
 
+
+/*
+next('route')的用法测试--跳过当前路由分组中的callback,继续执行下一个路由分组
+/user/11  "==走 next()=="-->>"==走 fn2()=="-->>"252345234523www"
+/user/0   "==走 next('route')=="-->>"252345234523www"
+*/
+
+router.get('/user/:id', function (req, res, next) {
+  // if the user ID is 0, skip to the next router
+  if (req.params.id === '0') {
+	  console.log("==走 next('route')==");
+	  next('route');
+  }else{
+	  console.log("==走 next()==")
+	  next();
+  }
+}, function (req, res, next) {
+  // render a regular page
+  //res.json('regular')
+  console.log("==走 fn2()==");
+  next()
+});
+
+// handler for the /user/:id path, which renders a special page
+router.get('/user/:id', function (req, res, next) {
+	console.log("252345234523www")
+  //console.log(req.params.id)
+  //res.json('special')
+});
+
+
+
 console.log("form userinfo.js");
 
 

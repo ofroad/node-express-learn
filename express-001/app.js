@@ -14,6 +14,9 @@ var Update = require('./routes/update');
 var find = require('./routes/find');
 var jwt = require('./routes/jwt');
 
+var fs = require('fs');
+var path = require('path');
+
 
 var app = express();
 
@@ -23,7 +26,12 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+
+//app.use(logger('dev'));
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+app.use(logger('combined', {stream: accessLogStream}));
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -58,4 +66,18 @@ mongoose.connect('mongodb://localhost:27017/test001',function (err) {
         console.log('数据库连接成功');
     }
 });
+
+/*
+__dirname 表示当前文件所在的目录的绝对路径
+__filename 表示当前文件的绝对路径
+module.filename ==== __filename 等价
+process.cwd() 返回运行当前脚本的工作目录的路径
+process.chdir() 改变工作目录
+*/
+console.log(__dirname);
+console.log(__filename);
+console.log(module.filename===__filename);
+console.log(process.cwd());
+
+
 module.exports = app;

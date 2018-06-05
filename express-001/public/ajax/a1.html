@@ -104,6 +104,17 @@ $(function(){
 			console.log(result.data[0].__v);
 		}
 	});
+	
+	//查询所有用户数据
+	$.ajax({
+		type:'Get',
+		url:'http://localhost:3000/v1/user11/11',
+		dataType:'json',
+		success:function (result) {
+			//alert(result.message);
+			console.log(result);
+		}
+	});
 });
 
 

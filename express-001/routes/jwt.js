@@ -19,7 +19,7 @@ var decode_token=jwt.decode(token),
 	
 console.log("token===",token);
 console.log("token2===",token2);
-
+/*
 //只返回payload
 console.log("decode_token===",decode_token);
 
@@ -56,7 +56,7 @@ setTimeout(
 	},
 	9000
 );
-
+*/
 
 
 

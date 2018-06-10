@@ -13,6 +13,7 @@ var Add = require('./routes/add');
 var Update = require('./routes/update');
 var find = require('./routes/find');
 var jwt = require('./routes/jwt');
+var writelog = require('./routes/writelog');
 
 var fs = require('fs');
 var path = require('path');
@@ -41,6 +42,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/v1', userinfo);
 app.use('/v2', find);
+app.use('/v3', writelog);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

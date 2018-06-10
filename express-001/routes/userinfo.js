@@ -907,7 +907,7 @@ next('route')的用法测试--跳过当前路由分组中的callback,继续执�
 /user/11  "==走 next()=="-->>"==走 fn2()=="-->>"252345234523www"
 /user/0   "==走 next('route')=="-->>"252345234523www"
 */
-
+/*
 router.get('/user/:id', function (req, res, next) {
   // if the user ID is 0, skip to the next router
   if (req.params.id === '0') {
@@ -931,7 +931,7 @@ router.get('/user/:id', function (req, res, next) {
   //res.json('special')
 });
 
-
+*/
 
 console.log("form userinfo.js");
 

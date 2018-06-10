@@ -38,77 +38,31 @@
 <script>
 $(function(){
 	console.log("www");
-	$("#btn").on("click",function(){
-		$.ajax({
-            type:'POST',
-            url:'http://localhost:3000/v1/user/register',
-            data:{
-                username:$("#uname").val(),
-                password:$("#upwd").val(),
-                repassword:$("#upwdrep").val(),
-                mobile:$("#uphone").val(),
-                email:$("#uemail").val(),
-				age:$("#age").val(),
-				sex:$("#sex").val(),
-				truename:$("#name").val(),
-				workage:$("#workage").val(),
-				job:$("#job").val(),
-				childnumb:$("#childnumb").val(),
-				housenumb:$("#housenumb").val()
-            },
-            dataType:'json',
-            success:function (result) {
-                alert(result.message);
-				console.log(result);
-            }
-        })
-	});
 	
-	$("#btn2").on("click",function(){
-		$.ajax({
-            type:'POST',
-            url:'http://localhost:3000/v1/user/submitArticle',
-            data:{
-                title:$("#title").val(),
-                content:$("#content").val()
-            },
-            dataType:'json',
-            success:function (result) {
-                alert(result.message);
-				console.log(result);
-            }
-        })
-	});
-	/*
+	
 	$.ajax({
 	   type: "get",
-	   url: "http://localhost:3000/v1/getUserInfo",
-	   data: "id=2",
+	   url: "http://localhost:3000/v3/user/pushlog",
+	   data:{
+			time:"2018-06-10 13:58:28",
+			api:"http://211.95.59.228:8050/DashboardTwoAPI/GetDayDetail",
+			method:"post",
+			params:"productCode=0",
+			project:"pad",
+			project_language:"cn",
+			response:'{"errorCode":1,"data":"ORA-03113: end-of-file on communication channel\nProcess ID: 22735\nSession ID: 2235 Serial number: 59206","time":"2018-06-10 13:47:14"}'
+	   },
+	   dataType:'json',
 	   success: function(data){
 			alert("222");
 			console.log(data)
 	   }
 	});
-	*/
 	
-	//查询所有用户数据
-	/*
-	$.ajax({
-		type:'POST',
-		url:'http://localhost:3000/v2/user/getall',
-		data:{},
-		dataType:'json',
-		success:function (result) {
-			//alert(result.message);
-			console.log(result);
-			console.log(result.data[0]._id);
-			console.log(result.data[0].__v);
-		}
-	});
-	*/
 	
-	//查询所有用户数据
+	
 	/*
+	//查询所有用户数据
 	$.ajax({
 		type:'Get',
 		url:'http://localhost:3000/v1/user11/11',
